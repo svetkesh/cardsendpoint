@@ -3,16 +3,16 @@ from flask import Flask, jsonify, request, make_response, abort
 try:
     from .calculator import calculate
 except ImportError:
-    from calculator import calculate
+    from calculator import calculate  # fall back for running in PyCharm
 import logging
 from flask_httpauth import HTTPBasicAuth
 
 auth = HTTPBasicAuth()
 
-
 app = Flask(__name__)
 
 logging.basicConfig(filename="app.log", level=logging.DEBUG)
+
 
 @auth.get_password
 def get_password(username):
@@ -79,4 +79,4 @@ def calculate_hands():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='5000', debug=True)
+    app.run(host='0.0.0.0', port='5005', debug=True)

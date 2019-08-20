@@ -1,4 +1,4 @@
-import json
+#!flask/bin/python
 from collections import Counter
 
 
@@ -6,6 +6,7 @@ VALUES_ORDER = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "D", "K", "A"
 
 
 def max_value(cards, reverse=False):
+    """Calculate maximum value of cards (minimum if reverse=True)"""
     try:
         indexes = [VALUES_ORDER.index(c) for c in cards]
         # sorted(indexes, reverse=reverse)
@@ -18,10 +19,8 @@ def max_value(cards, reverse=False):
 
 
 def calculate(hand):
-
-    cnt = Counter()
-    print(hand)
-
+    """Calculate poker cards wining combination rank, higher - better and higher card"""
+    # print(hand)
     try:
         # report = {}
         result = 0
