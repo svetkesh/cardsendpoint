@@ -157,4 +157,3 @@ def process_hands(hands):
         return report
     except Exception as e:
         raise Exception(f"ERROR while processing hands: {type(e), e}")
-
