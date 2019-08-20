@@ -19,9 +19,14 @@ def max_value(cards, reverse=False, second=False):
         # hand = hand.split(",")
         raise Exception(f"ERROR not a valid format for cards: {cards}")
 
-def verbose(hand):
+def verbose(coded_values):
     try:
-        # {"rank": rank, "max_card": max_card}
+        # {"rank": rank, "max_card": max_card, "second_value": second_value}
+
+        rank = coded_values["rank"]
+        max_card = coded_values["max_card"]
+        second_value = coded_values["second_value"]
+
         DICT_SUITS = {
             "C": "clubs",
             "D": "dimonds",
@@ -30,9 +35,9 @@ def verbose(hand):
 
         }
         DICT_VALS = {
-            "2": "two of ", "3": "three of ", "4": "four of ", "5": "five of ",
-            "6": "six of ", "7": "seven of ", "8": "eight of ", "9": "nine of ",
-            "10": "ten of ", "J": "jack of ", "Q": "queen of", "K": "king of ", "A": "ace of"
+            "2": "two", "3": "three", "4": "four", "5": "five",
+            "6": "six", "7": "seven", "8": "eight", "9": "nine",
+            "10": "ten", "J": "jack", "Q": "queen", "K": "king", "A": "ace"
         }
         DICT_RANKS = {
             0: "high card is ",
@@ -40,6 +45,28 @@ def verbose(hand):
             2: "set of ",
             0: "high card is ",
         }
+
+        if rank == 0:
+            readable_value = f"high card is {DICT_VALS[max_card]}"
+        elif rank == 1:
+            readable_value = f"pair of {DICT_VALS[max_card]}s with highest next {DICT_VALS[second_value]}"
+        elif rank == 2:
+            readable_value = f"two pairs of {DICT_VALS[max_card]}s and {DICT_VALS[second_value]}"
+        elif rank == 3:
+            readable_value = f"three of a kind {DICT_VALS[max_card]}s with {DICT_VALS[second_value]}"
+        elif rank == 4:
+            readable_value = f"straight from {DICT_VALS[max_card]}"
+        elif rank == 5:
+            readable_value = f"flush starts from {DICT_VALS[max_card]}"
+        elif rank == 6:
+            readable_value = f"full house {DICT_VALS[max_card]}s with {DICT_VALS[second_value]}s"
+        elif rank == 7:
+            readable_value = f"four of a kind {DICT_VALS[max_card]}s with {DICT_VALS[second_value]}"
+        else:
+            readable_value = f"straight flush or even royal flush, you win for sure except 1/1317239 chance."
+
+        return readable_value
+
 
     except Exception as e:
         return {"result": str(e)}
@@ -128,6 +155,7 @@ def calculate(hand):
             rank = 4    # Straight
         if len(set(card_suits)) == 1:
             rank = 5    # flush
+            max_card = two_most_often_values[0][0]
         if most_0 == 3 and most_1 == 2:
             rank = 6    # full house
         if most_0 == 4:
@@ -142,7 +170,10 @@ def calculate(hand):
 
         print(f"calculate found:{rank}")
 
-        return {"rank": rank, "max_card": max_card, "second_value": second_value}
+        coded_values = {"rank": rank, "max_card": max_card, "second_value": second_value}
+        readable_value = verbose(coded_values)
+
+        return {"result": readable_value}
 
     except Exception as e:
         return {"result": str(e)}
