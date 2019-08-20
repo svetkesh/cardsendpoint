@@ -33,7 +33,7 @@ def not_found(error):
 
 @app.route('/')
 def index():
-    return "It is poker calculator!"
+    return "It is poker calculator! Please use poker as user name and password"
 
 
 @app.route('/data', methods=['POST'])
