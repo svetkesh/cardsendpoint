@@ -3,7 +3,7 @@ from flask import Flask, jsonify, request, make_response, abort
 try:
     from .calculator import calculate
 except ImportError:
-    from calculator import calculate  # fall back for running in PyCharm
+    from calculator import calculate  # fall back for running in pycharm
 import logging
 from flask_httpauth import HTTPBasicAuth
 
