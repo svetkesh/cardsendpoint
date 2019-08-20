@@ -113,8 +113,6 @@ def calculate(hand):
         two_most_often_suits = Counter(card_suits).most_common(2)
         print(two_most_often_suits[0])
 
-        most_suit = two_most_often_suits[0][1]
-
         most_0 = two_most_often_values[0][1]
         most_1 = two_most_often_values[1][1]
 
