@@ -14,16 +14,24 @@ Calculate poker cards wining combination rank, higher - better and higher card
 
     POST 127.0.0.1:5005/api/v1.0/hands
     {
-        "hand": ["DA", "CA", "D7", "D6", "D3"]
+        "hand": ["DK", "CA", "D7", "D7", "DJ"]
     }
 
     returns:
     {
       "hand": {
-        "max_card": "A",
+        "max_card": "7",
         "rank": 1
       }
     }
 
-    where rank 1 stands for 'pair of'
-    and A for ACE
+    where rank 1 stands for 'pair of' 7th
+    
+    Also 
+    GET 127.0.0.1:5005/api/v1.0/calculate/DA,CA,D7,D6,D3
+    
+    calculates:
+    {
+      "max_card": "A",
+      "rank": 1
+    }
