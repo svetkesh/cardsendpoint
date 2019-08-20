@@ -21,9 +21,7 @@ Calculate poker cards wining combination rank, higher - better and higher card
     returns:
     {
       "hand": {
-        "max_card": "K",
-        "rank": 2,
-        "second_value": "7"
+        "result": "two pairs of kings and seven"
       }
     }
 
